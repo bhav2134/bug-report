@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/register.css">
+    <title>Bug Reporting System</title>
+    <style>
+        /* Style for the popup for terms and cinditions */
+        #popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 120%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        #popup-content {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create an account</h1>
+    <form method="post">
+      <fieldset>
+        <label for="first-name">Enter Your Name: <input id="first-name" name="first-name" type="text" required /></label>
+        <label for="email">Enter Your Email: <input id="email" name="email" type="email" required /></label>
+        <label for="new-password">Create a New Password: <input id="new-password" name="new-password" type="password" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 3}$" required /></label>
+      </fieldset>
+      <label for="terms-and-conditions">
+        <input class="inline" id="terms-and-conditions" type="checkbox" required name="terms-and-conditions" /> I accept the <a href="#" id="terms-link">terms and conditions</a>
+      </label>
+      <input type="submit" value="Submit" />
+    </form>
+
+    <!-- Popup for terms and conditions -->
+    <div id="popup-overlay"></div>
+    <div id="popup-content">
+        <h2>Terms and Conditions</h2>
+        <p>Terms and Conditions
+
+          By using our Bug Reporting System, you agree to the following terms and conditions: </br> </br>
+          
+          1. Confidentiality: Any information shared on this platform, including bug reports and discussions, must be kept confidential and should not be disclosed to unauthorized parties. </br> </br>
+          
+          2. Accurate Information: Users are responsible for providing accurate and truthful information when submitting bug reports or any other data through the Bug Reporting System. </br> </br>
+          
+          3. Prohibited Activities: Users must not engage in any activity that disrupts the normal functioning of the Bug Reporting System, including but not limited to hacking, spamming, or any other form of malicious behavior.
+          </br> </br>
+
+          4. Intellectual Property: All content submitted to the Bug Reporting System, including bug reports, suggestions, and comments, may be subject to intellectual property rights. Users retain ownership of their content but grant us a non-exclusive, royalty-free license to use, modify, and distribute it for the purpose of improving our services. </br> </br>
+          
+          By clicking "I accept" or using the Bug Reporting System, you acknowledge that you have read, understood, and agree to abide by these terms and conditions. </br> </br>
+          </p>
+        <button id="close-popup">Close</button>
+    </div>
+
+    <script>
+        // Function to show the popup
+        function showPopup() {
+            document.getElementById('popup-overlay').style.display = 'block';
+            document.getElementById('popup-content').style.display = 'block';
+        }
+
+        // Function to hide the popup
+        function hidePopup() {
+            document.getElementById('popup-overlay').style.display = 'none';
+            document.getElementById('popup-content').style.display = 'none';
+        }
+
+        // Event listener for terms and conditions link
+        document.getElementById('terms-link').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            showPopup(); // Show the popup
+        });
+
+        // Event listener for close button
+        document.getElementById('close-popup').addEventListener('click', hidePopup);
+    </script>
+</body>
+</html>
