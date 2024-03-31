@@ -1,55 +1,112 @@
+/* Resetting default margin and padding */
 * {
-    font-family: 'Inter', 'Arial', sans-serif;
-}
-
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    border-radius: 8px;
 }
 
-button{
-    padding: 14px 20px;
-    margin: 8px 0;
-    cursor: pointer;
-    width: 100%;
-    border-radius: 10px;
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #fff;
+    padding: 0;
+    line-height: 1.6;
 }
 
-form{
-    padding:30px 20px;
-    width: 25%;
-    border-radius: 10px;
+/* Header styles */
+.header-container {
+    background-color: #333;
+    color: #fff;
+    margin-bottom: 20px;
+    padding-bottom: 2px;
 }
 
-.info-container{
-    margin-bottom: 5px;
-}
-
-.containerB{
+.homepage-nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px 0px 20px; 
+    margin-bottom: 20px;
 }
 
-.cancelbtn{
-    width: 30%;
+.homepage-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-
-.forgotbtn{
-    width: 30%;
+.homepage-nav ul li {
+    display: inline;
+    margin-right: 20px;
 }
 
-.button:hover {
-    border: 12px solid green;
+.homepage-nav ul li:last-child {
+    margin-right: 0;
+}
+
+.homepage-nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.homepage-nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Heading styles */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 150px;
+}
+
+/* Form styles */
+.form-container {
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form input[type="text"],
+.form input[type="password"],
+.form input[type="submit"] {
+    display: block;
+    width: 30em;
+    padding: 10px;
+    margin: 0 auto 10px; /* Center and add margin bottom */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #444;
+    color: #fff;
+}
+
+.form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Sign up link */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
 }

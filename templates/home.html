@@ -13,7 +13,7 @@
         <header class="header-container">
             <nav class="homepage-nav">
                 <ul class="left-sec-nav">
-                    <li><a style="font-size: xx-large;" href="">Bug Reporting System</a></li>
+                    <li><a href="">Bug Reporting System</a></li>
                 </ul>
                 <ul class="right-sec-nav">
                     <li><a href="">Home</a></li>
@@ -24,16 +24,18 @@
         </header>
         <section class="main-content-container">
             <div class="main-text-section">
-                <h2 style="font-size: 70px;">Welcome to the BRS</h2>
+                <h2>Welcome to the BRS</h2>
                 <p class="main-subtext">Keep your and your team synchronized</p>
                 <p class="main-subtext">With real-time updated bug reports</p>
             </div>
             <div class="option-button">
-                <a href="">Report a Bug</a>
+                <a href="{{ url_for('login') }}">Report a Bug</a>
             </div>
             <div class="option-button">
+                <a href="{{ url_for('login') }}">Login</a>
                 <a href="{{ url_for('register') }}">Register an Account</a>
             </div>
+            <img src="../images/debug-background.png" alt="Image Description">
         </section>
         <footer class="footer-container">
                 <ul class="footer-content">

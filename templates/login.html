@@ -3,15 +3,28 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href='../static/login.css'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
 
 <body>
-    <h1>Login Page</h1>
+    <header class="header-container">
+        <nav class="homepage-nav">
+            <ul class="left-sec-nav">
+                <li><a href="{{ url_for('home') }}">Bug Reporting System</a></li>
+            </ul>
+            <ul class="right-sec-nav">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('register') }}">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1 class="title">Login Page</h1>
 
-    <form method="POST" action="">
+    <form class="form" method="POST" action="">
         {{ form.hidden_tag() }}
         {{ form.username }}
         {{ form.password }}
