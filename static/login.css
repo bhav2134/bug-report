@@ -21,16 +21,15 @@ input[type=text], input[type=password] {
 button{
     padding: 14px 20px;
     margin: 8px 0;
-    border: none;
     cursor: pointer;
     width: 100%;
+    border-radius: 10px;
 }
 
 form{
     padding:30px 20px;
     width: 25%;
     border-radius: 10px;
-    background-color: beige;
 }
 
 .info-container{
@@ -44,10 +43,13 @@ form{
 
 .cancelbtn{
     width: 30%;
-    border-radius: 10px;
 }
 
 
 .forgotbtn{
     width: 30%;
+}
+
+.button:hover {
+    border: 12px solid green;
 }

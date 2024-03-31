@@ -1,33 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../static/login.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-        <title>Sign in - Bug Report System</title>
-    </head>
-    <body>
-        <form action="action_page.php" method="post">
-            
-            <div class="info-container">
-                <h1>Login</h1>
-                <h5>with your bug report account</h2>
-            </div>
-            <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-            </div>  
-            <button type="submit">Login</button>
-            <div class="containerB">
-                <button type="button" class="cancelbtn">Cancel</button>
-                <button type="button" class="forgotbtn">Forgot Password</button>
-            </div>        
-        </form>
-        
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+    <h1>Login Page</h1>
+
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.username }}
+        {{ form.password }}
+        {{ form.submit }}
+    </form>
+
+    <a href="{{ url_for('register') }}">Don't have an account? Sign Up</a>
+</body>
+
 </html>
