@@ -7,7 +7,6 @@
 
 /* Body styles */
 body {
-    font-family: 'Inter', sans-serif;
     line-height: 1.6;
     background-color: #222;
     color: #fff;
@@ -93,6 +92,10 @@ body {
 
 .option-button a:hover {
     background-color: #555;
+}
+
+.image {
+    width: 20em;
 }
 
 /* Footer styles */
