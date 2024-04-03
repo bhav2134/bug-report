@@ -109,3 +109,13 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.errors {
+    text-align: center;
+    list-style-type: none;
+    border: transparent solid 0em;
+    font-family: Arial, Helvetica, sans-serif;
+    color: red;
+    margin-bottom: 1em;
+    margin-top: -1em;
+}

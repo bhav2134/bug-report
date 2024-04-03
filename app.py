@@ -38,18 +38,27 @@ class RegisterForm(FlaskForm):
     def validate_username(self, username):
         existing_user_username = User.query.filter_by(username=username.data).first()
         if existing_user_username:
-            raise ValidationError("That username already exists, Please choose a different one")
+            raise ValidationError("username already exists, Please choose a different username")
     
     def validate_email(self, email):
         existing_user_email = User.query.filter_by(email=email.data).first()
         if existing_user_email:
-            raise ValidationError("That Email already exists, Please choose a different one or log in")
+            raise ValidationError("email already exists, Please choose a different email one or log in")
         
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
-    email = StringField(validators=[InputRequired(), Length(min=4, max=50)], render_kw={"placeholder": "Email"})
     password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Password"})
     submit = SubmitField("Login")
+
+    def validate_username(self, username):
+        existing_user_username = User.query.filter_by(username=username.data).first()
+        if not existing_user_username:
+            raise ValidationError("username not found")
+
+    def validate_password(self, password):
+        user = User.query.filter_by(username=self.username.data).first()
+        if user and not bcrypt.check_password_hash(user.password, password.data):
+            raise ValidationError("Incorrect password, try again")
 
 
 @app.route('/')

@@ -26,12 +26,28 @@
     <h1 class="title">Login</h1>
 
     <form class="form" method="POST" action="">
+        {% if form.username.errors %}
+            <ul class="errors">
+                {% for error in form.username.errors %}
+                    <li class="incorrect-username">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        {% if form.password.errors %}
+            <ul class="errors">
+                {% for error in form.password.errors %}
+                    <li class="incorrect-password">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    
         {{ form.hidden_tag() }}
         {{ form.username }}
-        {{ form.email }}
         {{ form.password }}
         {{ form.submit }}
     </form>
+    
 
     <a href="{{ url_for('register') }}">Don't have an account? Sign Up</a>
 </body>
