@@ -29,6 +29,14 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
 
+class Bug(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True) 
+    username = db.Column(db.String(20), nullable=False)
+    email = db.Column(db.String(50), nullable=False)
+    bug_description=db.Column(db.String(800), nullable=False)
+    bug_status=db.Column(db.String(20), nullable=True)  
+
+
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
     email = StringField(validators=[InputRequired(), Email(), Length(min=4, max=50)], render_kw={"placeholder": "Email"})
