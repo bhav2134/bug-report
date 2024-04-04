@@ -88,7 +88,7 @@ def login():
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     bug_reports = Bug.query.all()
-    return render_template('dashboard.html')
+    return render_template('dashboard.html', bug_reports=bug_reports)
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
