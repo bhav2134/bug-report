@@ -1,57 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- dashboard.html -->
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href='../static/dashboard.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../static/ladybug-bug-svgrepo-com.svg" type="image/x-icon"> 
     <title>Bug Report Dashboard</title>
-    <style>
-        /* CSS styles for the navigation bar */
-        .navbar {
-            width: 200px;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #333;
-            padding: 20px;
-            color: white;
-        }
-
-        .navbar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .navbar li {
-            margin-bottom: 10px;
-        }
-
-        .navbar li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .logout {
-            position: absolute;
-            bottom: 20px;
-        }
-    </style>
 </head>
 
 <body>
     <div class="navbar">
         <ul>
-            <li><a href="">bug report</a></li>
+            <li><a href="{{url_for('dashboard')}}">dashboard</a></li>
+            <li><a href="{{url_for('submit_bug')}}">bug report</a></li>
             <li><a href="">view bug statistics</a></li>
-            <li><a href="{{url_for('logout')}}">Logout</a></li>
-
+            <li><a href="{{url_for('logout')}}">logout</a></li>
         </ul>
     </div>
-    <div style="margin-left: 200px;"> <!-- Adjust margin-left to match navbar width -->
-        <!-- Content on the right side of the screen -->
+    <div class="table">
+        <h2>Bug Reports</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Description</th>
+                <th>Flair</th>
+                <th>Status</th>
+            </tr>
+            {% for bug in bug_reports %}
+            <tr>
+                <td>{{ bug.id }}</td>
+                <td>{{ bug.username }}</td>
+                <td>{{ bug.email }}</td>
+                <td>{{ bug.bug_description }}</td>
+                <td>{{ bug.bug_flair }}</td>
+                <td>{{ bug.bug_status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
     </div>
 </body>
 

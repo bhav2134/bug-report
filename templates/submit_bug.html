@@ -1,0 +1,38 @@
+<!-- submit_bug.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href='../static/submit_bug.css'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Submit Bug Report</title>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="{{url_for('dashboard')}}">dashboard</a></li>
+            <li><a href="{{url_for('submit_bug')}}">submit bug</a></li>
+            <li><a href="">view bug statistics</a></li>
+            <li><a href="{{url_for('logout')}}">logout</a></li>
+        </ul>
+    </div>
+    <div class="form-container">
+        <h1>Submit Bug Report</h1>
+            <form method="POST" action="{{ url_for('submit_bug') }}">
+                <div class="form"> 
+                    <!-- Bug Report Form -->
+                        <label for="username">Your Username:</label><br>
+                        <input type="text" id="username" name="username" required><br>
+                        <label for="email">Your Email:</label><br>
+                        <input type="email" id="email" name="email" required><br>
+                        <label for="bug_description">Bug Description:</label><br>
+                        <textarea id="bug_description" name="bug_description" required></textarea><br>
+                        <label for="bug_flair">Bug Flair:</label><br>
+                        <input type="text" id="bug_flair" name="bug_flair"><br>
+                        <label for="bug_status">Bug Status:</label><br>
+                        <input type="text" id="bug_status" name="bug_status"><br><br>
+                        <input type="submit" value="Submit Bug Report">
+            </form>
+    </div>
+</body>
+</html>

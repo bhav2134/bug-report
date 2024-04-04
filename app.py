@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required,logout_user, current_user
 from flask_wtf import FlaskForm
@@ -34,6 +34,7 @@ class Bug(db.Model, UserMixin):
     username = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     bug_description=db.Column(db.String(800), nullable=False)
+    bug_flair=db.Column(db.String(20), nullable=True)
     bug_status=db.Column(db.String(20), nullable=True)  
 
 
@@ -86,6 +87,7 @@ def login():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
+    bug_reports = Bug.query.all()
     return render_template('dashboard.html')
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -107,6 +109,29 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('register.html', form=form)
+
+@app.route('/submit_bug', methods=['GET'])
+@login_required
+def submit_bug_page():
+    return render_template('submit_bug.html')
+
+
+@app.route('/submit_bug', methods=['POST'])
+@login_required
+def submit_bug():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        bug_description = request.form['bug_description']
+        bug_flair = request.form['bug_flair']
+        bug_status = request.form['bug_status']
+
+        # Create a new Bug instance and add it to the database
+        new_bug = Bug(username=username, email=email, bug_description=bug_description, bug_flair=bug_flair, bug_status=bug_status)
+        db.session.add(new_bug)
+        db.session.commit()
+
+        return redirect(url_for('submit_bug'))
 
 if __name__ == '__main__':
     app.run(debug=True)
