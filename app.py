@@ -124,14 +124,23 @@ def submit_bug():
         email = request.form['email']
         bug_description = request.form['bug_description']
         bug_flair = request.form['bug_flair']
-        bug_status = request.form['bug_status']
 
         # Create a new Bug instance and add it to the database
-        new_bug = Bug(username=username, email=email, bug_description=bug_description, bug_flair=bug_flair, bug_status=bug_status)
+        new_bug = Bug(username=username, email=email, bug_description=bug_description, bug_flair=bug_flair, bug_status="Open")
         db.session.add(new_bug)
         db.session.commit()
 
         return redirect(url_for('submit_bug'))
+    
+@app.route('/update_bug_status/<int:bug_id>', methods=['POST'])
+@login_required
+def update_bug_status(bug_id):
+    bug = Bug.query.get(bug_id)
+    if bug:
+        new_status = request.form.get('bug_status')
+        bug.bug_status = new_status
+        db.session.commit()
+    return redirect(url_for('dashboard'))
 
 if __name__ == '__main__':
     app.run(debug=True)

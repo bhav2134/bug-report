@@ -27,6 +27,10 @@ body {
     text-decoration: none;
 }
 
+.navbar li a:hover {
+    text-decoration: underline;
+}
+
 .logout {
     position: absolute;
     bottom: 20px;
@@ -34,17 +38,15 @@ body {
 
 .form-container {
     background-color: #333;
-    max-width: 600px;
-    padding: 30px 40px 30px 20px;
+    max-width: 700px;
+    padding: 30px 50px 30px 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     color: white;
-    margin-left: 500px;
-    margin-right: auto;
-    margin-top: 40px;
+    margin: 50px auto 0px 500px;
 }
 
-.form-container h2 {
+.form-container h1 {
     text-align: center;
 }
 
@@ -52,19 +54,23 @@ body {
     display: grid;
 }
 
-.form-container label {
-    font-weight: bold;
-}
-
 .form-container input[type="text"],
 .form-container input[type="email"],
 .form-container textarea {
     width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.form-container select {
+    width: 30%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
-    margin-bottom: 10px;   
-    margin-top: 5px; 
+    margin-top: 5px;
 }
 
 .form-container textarea {
@@ -72,14 +78,30 @@ body {
 }
 
 .form-container input[type="submit"] {
-    background-color: green;
+    background-color: rgb(5, 142, 5);
     color: #fff;
     border: none;
     border-radius: 3px;
     padding: 10px 20px;
     cursor: pointer;
+    margin-bottom: 2em;
 }
 
 .form-container input[type="submit"]:hover {
-    background-color: #555;
+    background-color: rgb(6, 95, 6);
+}
+
+.view-all-bugs {
+    background-color: rgb(5, 142, 5);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: small;
+}
+
+.view-all-bugs:hover {
+    background-color: rgb(6, 95, 6);
 }

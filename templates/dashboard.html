@@ -12,14 +12,15 @@
     <div class="navbar">
         <ul>
             <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-            <li><a href="{{ url_for('submit_bug') }}">Bug Report</a></li>
+            <li><a href="{{ url_for('submit_bug') }}">Submit A Bug</a></li>
             <li><a href="">View Bug Statistics</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
         </ul>
     </div>
     <div class="table">
-        <h2>Bug Reports</h2>
-        <table>
+        <h2>Bug Reports Dashboard</h2>
+        <a href="{{ url_for('submit_bug') }}" class="add-a-bug">Add A Bug</a>
+        <table class="bug-report-table">
             <tr>
                 <th>ID</th>
                 <th>Username</th>
@@ -35,7 +36,18 @@
                 <td>{{ bug.email }}</td>
                 <td>{{ bug.bug_description }}</td>
                 <td>{{ bug.bug_flair }}</td>
-                <td>{{ bug.bug_status }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('update_bug_status', bug_id=bug.id) }}">
+                        <select name="bug_status">
+                            <option value="Open" {% if bug.bug_status == 'Open' %} selected {% endif %}>Open</option>
+                            <option value="In Progress" {% if bug.bug_status == 'In Progress' %} selected {% endif %}>In Progress</option>
+                            <option value="Fixed" {% if bug.bug_status == 'Fixed' %} selected {% endif %}>Fixed</option>
+                            <option value="Pending Review" {% if bug.bug_status == 'Pending Review' %} selected {% endif %}>Pending Review</option>
+                            <option value="Won't Fix" {% if bug.bug_status == 'Won\'t Fix' %} selected {% endif %}>Won't Fix</option>
+                        </select>
+                        <input type="submit" value="Update">
+                    </form>
+                </td>                
             </tr>
             {% endfor %}
         </table>

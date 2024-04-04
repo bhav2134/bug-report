@@ -11,10 +11,10 @@
 <body>
     <div class="navbar">
         <ul>
-            <li><a href="{{url_for('dashboard')}}">dashboard</a></li>
-            <li><a href="{{url_for('submit_bug')}}">submit bug</a></li>
-            <li><a href="">view bug statistics</a></li>
-            <li><a href="{{url_for('logout')}}">logout</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('submit_bug') }}">Submit A Bug</a></li>
+            <li><a href="">View Bug Statistics</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
         </ul>
     </div>
     <div class="form-container">
@@ -29,10 +29,27 @@
                         <label for="bug_description">Bug Description:</label><br>
                         <textarea id="bug_description" name="bug_description" required></textarea><br>
                         <label for="bug_flair">Bug Flair:</label><br>
-                        <input type="text" id="bug_flair" name="bug_flair"><br>
-                        <label for="bug_status">Bug Status:</label><br>
-                        <input type="text" id="bug_status" name="bug_status"><br><br>
-                        <input type="submit" value="Submit Bug Report">
+                        <select id="bug_flair" name="bug_flair">
+                            <option value="None">Choose an option</option>
+                            <option value="UI/UX">UI/UX</option>
+                            <option value="Security">Security</option>
+                            <option value="Performance">Performance</option>
+                            <option value="Compatibility">Compatibility</option>
+                            <option value="Functionality">Functionality</option>
+                            <option value="Accessibility">Accessibility</option>
+                            <option value="Localization">Localization</option>
+                            <option value="Documentation">Documentation</option>
+                            <option value="Data Integrity">Data Integrity</option>
+                            <option value="Network">Network</option>
+                            <option value="Database">Database</option>
+                            <option value="Third-party Integration">Third-party Integration</option>
+                            <option value="Browser/Platform-specific">Browser/Platform-specific</option>
+                            <option value="Regression">Regression</option>
+                            <option value="other">Other</option>
+                            <!-- Add more specific flair options as needed -->
+                        </select></br></br>                                          
+                        <input type="submit" value="Submit Bug Report"></br>
+                        <a class="view-all-bugs" href="{{ url_for('dashboard') }}">View All Bugs</a>
             </form>
     </div>
 </body>

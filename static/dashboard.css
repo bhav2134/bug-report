@@ -27,14 +27,13 @@ body {
     text-decoration: none;
 }
 
-.logout {
-    position: absolute;
-    bottom: 20px;
+.navbar li a:hover {
+    text-decoration: underline;
 }
 
 .table {
-    margin-left: 300px;
-    width: calc(100% - 300px);
+    margin-left: 250px;
+    width: calc(98% - 300px);
     margin-top: 60px;
     border-collapse: collapse;
 }
@@ -55,4 +54,23 @@ body {
 
 .table tr:hover {
     background-color: #ddd;
+}
+
+.add-a-bug {
+    background-color: rgb(5, 142, 5);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: small;
+}
+
+.add-a-bug:hover {
+    background-color: rgb(6, 95, 6);
+}
+
+.bug-report-table {
+    margin-top: 25px;
 }
