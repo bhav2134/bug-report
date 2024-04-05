@@ -6,6 +6,7 @@ from wtforms import StringField, PasswordField,SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 from wtforms.validators import Email
+from datetime import datetime
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -33,9 +34,10 @@ class Bug(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True) 
     username = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(50), nullable=False)
-    bug_description=db.Column(db.String(800), nullable=False)
-    bug_flair=db.Column(db.String(20), nullable=True)
-    bug_status=db.Column(db.String(20), nullable=True)  
+    bug_description = db.Column(db.String(800), nullable=False)
+    bug_flair = db.Column(db.String(20), nullable=True)
+    bug_status = db.Column(db.String(20), nullable=True)
+    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
 
 class RegisterForm(FlaskForm):
@@ -126,11 +128,14 @@ def submit_bug():
         bug_flair = request.form['bug_flair']
 
         # Create a new Bug instance and add it to the database
-        new_bug = Bug(username=username, email=email, bug_description=bug_description, bug_flair=bug_flair, bug_status="Open")
+        new_bug = Bug(username=username, email=email, bug_description=bug_description, 
+                      bug_flair=bug_flair, bug_status="Open")
         db.session.add(new_bug)
         db.session.commit()
 
         return redirect(url_for('submit_bug'))
+
+
     
 @app.route('/update_bug_status/<int:bug_id>', methods=['POST'])
 @login_required

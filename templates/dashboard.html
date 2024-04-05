@@ -22,11 +22,12 @@
         <a href="{{ url_for('submit_bug') }}" class="add-a-bug">Add A Bug</a>
         <table class="bug-report-table">
             <tr>
-                <th>ID</th>
+                <th>#</th>
                 <th>Username</th>
                 <th>Email</th>
                 <th>Description</th>
                 <th>Flair</th>
+                <th>Bug Created</th>
                 <th>Status</th>
             </tr>
             {% for bug in bug_reports %}
@@ -36,6 +37,7 @@
                 <td>{{ bug.email }}</td>
                 <td>{{ bug.bug_description }}</td>
                 <td>{{ bug.bug_flair }}</td>
+                <td>{{ bug.timestamp }}</td>
                 <td>
                     <form method="POST" action="{{ url_for('update_bug_status', bug_id=bug.id) }}">
                         <select name="bug_status">
