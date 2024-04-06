@@ -8,6 +8,9 @@ from flask_bcrypt import Bcrypt
 from wtforms.validators import Email
 from datetime import datetime
 import plotly.graph_objs as go
+from flask_mail import Mail, Message
+import os
+from sqlalchemy import distinct
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -39,6 +42,14 @@ class Bug(db.Model, UserMixin):
     bug_flair = db.Column(db.String(20), nullable=True)
     bug_status = db.Column(db.String(20), nullable=True)
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'bugdatabase@gmail.com'
+app.config['MAIL_PASSWORD'] = os.getenv('mail_password')
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail=Mail(app)
 
 
 class RegisterForm(FlaskForm):
@@ -142,9 +153,14 @@ def submit_bug():
 def update_bug_status(bug_id):
     bug = Bug.query.get(bug_id)
     if bug:
+        bug_reporter_emails = db.session.query(distinct(Bug.email)).filter_by(id=bug_id).all()
         new_status = request.form.get('bug_status')
         bug.bug_status = new_status
         db.session.commit()
+        for email in bug_reporter_emails:
+            msg = Message("Hey", sender='bugdatabase@gmail.com', recipients=[email[0]])
+            msg.body = f"Bug {bug_id} status has been updated to {new_status}"
+            mail.send(msg)
     return redirect(url_for('dashboard'))
 
 @app.route('/close_bug/<int:bug_id>', methods=['POST'])
@@ -152,31 +168,25 @@ def update_bug_status(bug_id):
 def close_bug(bug_id):
     bug = Bug.query.get(bug_id)
     if bug:
+        bug_reporter_emails = db.session.query(distinct(Bug.email)).filter_by(id=bug_id).all()
+        for email in bug_reporter_emails:
+            msg = Message("Hey", sender='bugdatabase@gmail.com', recipients=[email[0]])    
+            msg.body = f"Bug {bug_id} status has been closed"
+            mail.send(msg)
         db.session.delete(bug)
         db.session.commit()
     return redirect(url_for('dashboard'))
 
+
 @app.route('/bug_graphs')
 def bug_graphs():
-    # Query database to get counts of bugs based on flair
     flair_counts = db.session.query(Bug.bug_flair, db.func.count()).group_by(Bug.bug_flair).all()
-
-    # Extract flair names and counts for plotting
     flair_names = [flair[0] for flair in flair_counts]
     flair_values = [flair[1] for flair in flair_counts]
-
-    # Create a bar chart
     data = [go.Bar(x=flair_names, y=flair_values)]
-
-    # Configure layout
     layout = go.Layout(title='Bug Flair Distribution', xaxis=dict(title='Flair'), yaxis=dict(title='Count'))
-
-    # Create a figure
     fig = go.Figure(data=data, layout=layout)
-
-    # Convert the figure to HTML
     graph_html = fig.to_html(full_html=False)
-
     return render_template('bug_graphs.html', graph_html=graph_html)
 
 if __name__ == '__main__':
