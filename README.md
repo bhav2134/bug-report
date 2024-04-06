@@ -62,11 +62,7 @@ We welcome contributions! Please follow the [contribution guidelines](CONTRIBUTI
 
 ## Contributors
 
-* Bhavdeep Arora
-* Hameez Iqbal
-* Mohammed Jama
-* Sarankan Srikaran
-* Kyle Teopiz
+Bhavdeep Arora, Hameez Iqbal, Mohammed Jama, Sarankan Srikaran, Kyle Teopiz
 
 ## License
 
