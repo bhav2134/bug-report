@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    padding: 20px;
+    color: white;
+    border-right: 1px solid white;
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.navbar li {
+    margin-bottom: 10px;
+}
+
+.navbar li a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar li a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+}
+
+.graph-container {
+    max-width: 80%; /* Adjust this value as needed */
+    margin: auto; /* Center the graph horizontally */
+}
+
+#graph {
+    max-width: 100%; /* Ensures the graph respects the maximum width of its container */
+    margin: auto; /* Center the graph horizontally */
+}
+
+h1 {
+    text-align: center;
+}

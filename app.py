@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, redirect, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required,logout_user, current_user
 from flask_wtf import FlaskForm
@@ -7,6 +7,7 @@ from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 from wtforms.validators import Email
 from datetime import datetime
+import plotly.graph_objs as go
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -136,7 +137,6 @@ def submit_bug():
         return redirect(url_for('submit_bug'))
 
 
-    
 @app.route('/update_bug_status/<int:bug_id>', methods=['POST'])
 @login_required
 def update_bug_status(bug_id):
@@ -147,6 +147,37 @@ def update_bug_status(bug_id):
         db.session.commit()
     return redirect(url_for('dashboard'))
 
+@app.route('/close_bug/<int:bug_id>', methods=['POST'])
+@login_required
+def close_bug(bug_id):
+    bug = Bug.query.get(bug_id)
+    if bug:
+        db.session.delete(bug)
+        db.session.commit()
+    return redirect(url_for('dashboard'))
+
+@app.route('/bug_graphs')
+def bug_graphs():
+    # Query database to get counts of bugs based on flair
+    flair_counts = db.session.query(Bug.bug_flair, db.func.count()).group_by(Bug.bug_flair).all()
+
+    # Extract flair names and counts for plotting
+    flair_names = [flair[0] for flair in flair_counts]
+    flair_values = [flair[1] for flair in flair_counts]
+
+    # Create a bar chart
+    data = [go.Bar(x=flair_names, y=flair_values)]
+
+    # Configure layout
+    layout = go.Layout(title='Bug Flair Distribution', xaxis=dict(title='Flair'), yaxis=dict(title='Count'))
+
+    # Create a figure
+    fig = go.Figure(data=data, layout=layout)
+
+    # Convert the figure to HTML
+    graph_html = fig.to_html(full_html=False)
+
+    return render_template('bug_graphs.html', graph_html=graph_html)
+
 if __name__ == '__main__':
     app.run(debug=True)
-

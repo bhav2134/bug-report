@@ -13,7 +13,7 @@
         <ul>
             <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
             <li><a href="{{ url_for('submit_bug') }}">Submit A Bug</a></li>
-            <li><a href="">View Bug Statistics</a></li>
+            <li><a href="{{ url_for('bug_graphs') }}">View Bug Statistics</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
         </ul>
     </div>
@@ -48,6 +48,9 @@
                             <option value="Won't Fix" {% if bug.bug_status == 'Won\'t Fix' %} selected {% endif %}>Won't Fix</option>
                         </select>
                         <input type="submit" value="Update">
+                    </form>
+                    <form method="POST" action="{{ url_for('close_bug', bug_id=bug.id) }}">
+                        <input type="submit" value="Close">
                     </form>
                 </td>                
             </tr>

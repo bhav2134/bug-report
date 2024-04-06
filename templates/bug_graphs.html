@@ -3,10 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../static/ladybug-bug-svgrepo-com.svg" type="image/x-icon"> 
-    <title>Document</title>
+    <link rel="stylesheet" href='../static/bug_graphs.css'>
+    <link rel="icon" href="../static/ladybug-bug-svgrepo-com.svg" type="image/x-icon">
+    <title>Bug Graphs</title>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
+    <div class="navbar">
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('submit_bug') }}">Submit A Bug</a></li>
+            <li><a href="{{ url_for('bug_graphs') }}">View Bug Statistics</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h1>Bug Flair Distribution</h1>
+        <div id="graph"></div>
+    </div>
     
+    <!-- JavaScript code to render the Plotly graph -->
+    <script>
+        document.getElementById('graph').innerHTML = "{{ graph_html | safe }}";
+    </script>
 </body>
 </html>
