@@ -40,13 +40,8 @@ body {
     padding: 20px;
 }
 
-.graph-container {
-    max-width: 80%; /* Adjust this value as needed */
-    margin: auto; /* Center the graph horizontally */
-}
-
 #graph {
-    max-width: 100%; /* Ensures the graph respects the maximum width of its container */
+    width: 10%;
     margin: auto; /* Center the graph horizontally */
 }
 

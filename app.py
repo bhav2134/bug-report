@@ -153,10 +153,11 @@ def submit_bug():
 def update_bug_status(bug_id):
     bug = Bug.query.get(bug_id)
     if bug:
-        bug_reporter_emails = db.session.query(distinct(Bug.email)).filter_by(id=bug_id).all()
+        bug_reporter_emails = db.session.query(distinct(Bug.email)).all()
         new_status = request.form.get('bug_status')
         bug.bug_status = new_status
         db.session.commit()
+        print(bug_reporter_emails)
         for email in bug_reporter_emails:
             msg = Message("Hey", sender='bugdatabase@gmail.com', recipients=[email[0]])
             msg.body = f"Bug {bug_id} status has been updated to {new_status}"
@@ -168,7 +169,7 @@ def update_bug_status(bug_id):
 def close_bug(bug_id):
     bug = Bug.query.get(bug_id)
     if bug:
-        bug_reporter_emails = db.session.query(distinct(Bug.email)).filter_by(id=bug_id).all()
+        bug_reporter_emails = db.session.query(distinct(Bug.email)).all()
         for email in bug_reporter_emails:
             msg = Message("Hey", sender='bugdatabase@gmail.com', recipients=[email[0]])    
             msg.body = f"Bug {bug_id} status has been closed"
@@ -180,13 +181,6 @@ def close_bug(bug_id):
 
 @app.route('/bug_graphs')
 def bug_graphs():
-    flair_counts = db.session.query(Bug.bug_flair, db.func.count()).group_by(Bug.bug_flair).all()
-    flair_names = [flair[0] for flair in flair_counts]
-    flair_values = [flair[1] for flair in flair_counts]
-    data = [go.Bar(x=flair_names, y=flair_values)]
-    layout = go.Layout(title='Bug Flair Distribution', xaxis=dict(title='Flair'), yaxis=dict(title='Count'))
-    fig = go.Figure(data=data, layout=layout)
-    graph_html = fig.to_html(full_html=False)
     return render_template('bug_graphs.html', graph_html=graph_html)
 
 if __name__ == '__main__':

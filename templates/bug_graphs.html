@@ -6,7 +6,6 @@
     <link rel="stylesheet" href='../static/bug_graphs.css'>
     <link rel="icon" href="../static/ladybug-bug-svgrepo-com.svg" type="image/x-icon">
     <title>Bug Graphs</title>
-    <!-- Plotly.js -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
@@ -23,7 +22,7 @@
         <div id="graph"></div>
     </div>
     
-    <!-- JavaScript code to render the Plotly graph -->
+    <!-- JavaScript code to render the graph -->
     <script>
         document.getElementById('graph').innerHTML = "{{ graph_html | safe }}";
     </script>
