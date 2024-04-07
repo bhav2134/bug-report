@@ -192,8 +192,6 @@ def bug_graphs():
     fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
     graph_html = fig.to_html(full_html=False)
 
-    
-
     return render_template('bug_graphs.html', graph_html=graph_html)
 
 if __name__ == '__main__':
