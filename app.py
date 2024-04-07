@@ -11,6 +11,8 @@ import plotly.graph_objs as go
 from flask_mail import Mail, Message
 import os
 from sqlalchemy import distinct
+import pandas as pd
+from collections import Counter
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -148,7 +150,7 @@ def submit_bug():
         return redirect(url_for('submit_bug'))
 
 
-@app.route('/update_bug_status/<int:bug_id>', methods=['POST'])
+@app.route('/update_bug_status', methods=['POST'])
 @login_required
 def update_bug_status(bug_id):
     bug = Bug.query.get(bug_id)
@@ -159,19 +161,19 @@ def update_bug_status(bug_id):
         db.session.commit()
         print(bug_reporter_emails)
         for email in bug_reporter_emails:
-            msg = Message("Hey", sender='bugdatabase@gmail.com', recipients=[email[0]])
+            msg = Message("This is a notification from your bug database app", sender='bugdatabase@gmail.com', recipients=[email[0]])
             msg.body = f"Bug {bug_id} status has been updated to {new_status}"
             mail.send(msg)
     return redirect(url_for('dashboard'))
 
-@app.route('/close_bug/<int:bug_id>', methods=['POST'])
+@app.route('/close_bug', methods=['POST'])
 @login_required
 def close_bug(bug_id):
     bug = Bug.query.get(bug_id)
     if bug:
         bug_reporter_emails = db.session.query(distinct(Bug.email)).all()
         for email in bug_reporter_emails:
-            msg = Message("Hey", sender='bugdatabase@gmail.com', recipients=[email[0]])    
+            msg = Message("This is a notification from your bug database app", sender='bugdatabase@gmail.com', recipients=[email[0]])    
             msg.body = f"Bug {bug_id} status has been closed"
             mail.send(msg)
         db.session.delete(bug)
@@ -181,6 +183,17 @@ def close_bug(bug_id):
 
 @app.route('/bug_graphs')
 def bug_graphs():
+    bug_reports = Bug.query.all()
+    bug_flairs = [bug.bug_flair for bug in bug_reports]
+    flair_counts = Counter(bug_flairs)
+    labels = list(flair_counts.keys())
+    values = list(flair_counts.values())
+
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    graph_html = fig.to_html(full_html=False)
+
+    
+
     return render_template('bug_graphs.html', graph_html=graph_html)
 
 if __name__ == '__main__':

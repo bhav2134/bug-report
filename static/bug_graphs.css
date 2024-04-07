@@ -34,16 +34,12 @@ body {
     text-decoration: underline;
 }
 
-.container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
+.plotly-graph-div {
+    width: 75% !important;
+    margin: 0 auto; /* Center-align horizontally */
+    margin-left: 250px;
 }
 
-#graph {
-    width: 10%;
-    margin: auto; /* Center the graph horizontally */
-}
 
 h1 {
     text-align: center;
