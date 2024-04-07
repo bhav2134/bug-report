@@ -1,9 +1,9 @@
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required,logout_user, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField,SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
+from wtforms.validators import InputRequired, Length, ValidationError, EqualTo
 from flask_bcrypt import Bcrypt
 from wtforms.validators import Email
 from datetime import datetime
@@ -84,6 +84,13 @@ class LoginForm(FlaskForm):
         user = User.query.filter_by(username=self.username.data).first()
         if user and not bcrypt.check_password_hash(user.password, password.data):
             raise ValidationError("Incorrect password, try again")
+
+class ChangePasswordForm(FlaskForm):
+    old_password = PasswordField('Old Password', validators=[InputRequired(), Length(min=4, max=20)])
+    new_password = PasswordField('New Password', validators=[InputRequired(), Length(min=4, max=20)])
+    confirm_password = PasswordField('Confirm New Password', validators=[InputRequired(), EqualTo('new_password')])
+    submit = SubmitField('Change Password')
+
 
 
 @app.route('/')
@@ -193,6 +200,23 @@ def bug_graphs():
     graph_html = fig.to_html(full_html=False)
 
     return render_template('bug_graphs.html', graph_html=graph_html)
+
+@app.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        user = current_user
+        if bcrypt.check_password_hash(user.password, form.old_password.data):
+            new_password_hashed = bcrypt.generate_password_hash(form.new_password.data).decode('utf-8')
+            user.password = new_password_hashed
+            db.session.commit()
+            flash('Your password has been updated successfully!', 'success')
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Invalid old password. Please try again.', 'danger')
+    return render_template('change_password.html', form=form)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
