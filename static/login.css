@@ -1,11 +1,9 @@
-/* Resetting default margin and padding */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body styles */
 body {
     background-color: #222;
     color: #fff;
@@ -14,7 +12,6 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-/* Header styles */
 .header-container {
     background-color: #333;
     color: #fff;
@@ -57,14 +54,12 @@ body {
     text-decoration: underline;
 }
 
-/* Heading styles */
 h1 {
     text-align: center;
     margin-bottom: 20px;
     margin-top: 150px;
 }
 
-/* Form styles */
 .form-container {
     max-width: 300px;
     margin: 0 auto;
@@ -80,7 +75,7 @@ h1 {
     display: block;
     width: 30em;
     padding: 10px;
-    margin: 0 auto 10px; /* Center and add margin bottom */
+    margin: 0 auto 10px; 
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #444;
