@@ -157,7 +157,7 @@ def submit_bug():
         return redirect(url_for('submit_bug'))
 
 
-@app.route('/update_bug_status', methods=['POST'])
+@app.route('/update_bug_status/<int:bug_id>', methods=['POST'])
 @login_required
 def update_bug_status(bug_id):
     bug = Bug.query.get(bug_id)
@@ -166,14 +166,13 @@ def update_bug_status(bug_id):
         new_status = request.form.get('bug_status')
         bug.bug_status = new_status
         db.session.commit()
-        print(bug_reporter_emails)
         for email in bug_reporter_emails:
             msg = Message("This is a notification from your bug database app", sender='bugdatabase@gmail.com', recipients=[email[0]])
             msg.body = f"Bug {bug_id} status has been updated to {new_status}"
             mail.send(msg)
     return redirect(url_for('dashboard'))
 
-@app.route('/close_bug', methods=['POST'])
+@app.route('/close_bug/<int:bug_id>', methods=['POST'])
 @login_required
 def close_bug(bug_id):
     bug = Bug.query.get(bug_id)
