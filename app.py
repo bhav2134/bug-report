@@ -160,7 +160,7 @@ def submit_bug():
 @app.route('/update_bug_status/<int:bug_id>', methods=['POST'])
 @login_required
 def update_bug_status(bug_id):
-    bug = Bug.query.get(bug_id)
+    bug = db.session.get(Bug,bug_id)
     if bug:
         bug_reporter_emails = db.session.query(distinct(Bug.email)).all()
         new_status = request.form.get('bug_status')
@@ -175,7 +175,7 @@ def update_bug_status(bug_id):
 @app.route('/close_bug/<int:bug_id>', methods=['POST'])
 @login_required
 def close_bug(bug_id):
-    bug = Bug.query.get(bug_id)
+    bug = db.session.get(Bug,bug_id)
     if bug:
         bug_reporter_emails = db.session.query(distinct(Bug.email)).all()
         for email in bug_reporter_emails:

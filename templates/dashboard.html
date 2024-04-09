@@ -7,6 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../static/ladybug-bug-svgrepo-com.svg" type="image/x-icon"> 
     <title>Bug Report Dashboard</title>
+    <script>
+        function confirmClose() {
+            return confirm("Are you sure you want to close this bug?");
+        }
+    </script>
+    <script>
+        function confirmUpdate() {
+            return confirm("Are you sure you want to Update this bug?");
+        }
+    </script>
 </head>
 <body>
     <div class="navbar">
@@ -23,7 +33,7 @@
         <a href="{{ url_for('submit_bug') }}" class="add-a-bug">Add A Bug</a>
         <table class="bug-report-table">
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Username</th>
                 <th>Email</th>
                 <th>Description</th>
@@ -40,7 +50,7 @@
                 <td>{{ bug.bug_flair }}</td>
                 <td>{{ bug.timestamp }}</td>
                 <td>
-                    <form method="POST" action="{{ url_for('update_bug_status', bug_id=bug.id) }}">
+                    <form method="POST" action="{{ url_for('update_bug_status', bug_id=bug.id) }}" onsubmit="return confirmUpdate()">
                         <select name="bug_status">
                             <option value="Open" {% if bug.bug_status == 'Open' %} selected {% endif %}>Open</option>
                             <option value="In Progress" {% if bug.bug_status == 'In Progress' %} selected {% endif %}>In Progress</option>
@@ -50,7 +60,7 @@
                         </select>
                         <input type="submit" value="Update">
                     </form>
-                    <form method="POST" action="{{ url_for('close_bug', bug_id=bug.id) }}">
+                    <form method="POST" action="{{ url_for('close_bug', bug_id=bug.id) }}" onsubmit="return confirmClose()">
                         <input type="submit" value="Close">
                     </form>
                 </td>                
