@@ -12,6 +12,17 @@ This system is designed to help users efficiently report and manage bugs or defe
 
 ## Usage
 
+### Setting Up The Email Sender Notifcation System
+
+1. Create a new gmail account and add a third-party app in your account settings where you will recieve an encrypted form of your password.
+2. Create a `.env` file in the bug-report directory and input `mail_password=your_encrypted_password` where your_encrypted_password is the password recieved from gmail account.
+3. Replace bugdatabase@gmail.com on `app.py` of respective line: `app.config['MAIL_USERNAME'] = 'bugdatabase@gmail.com'` with the email account you have created. 
+
+### Starting The Bug-Report App
+
+- Go to your app.py repository and run the command in the respective terminal: `python app.py` and head over to http://127.0.0.1:5000. 
+
+
 ### User Authentication
 
 1. Open the BRS web form.
@@ -38,6 +49,9 @@ This system is designed to help users efficiently report and manage bugs or defe
 * `/templates/dashboard.html`: HTML file for the dashboard page.
 * `/templates/login.html`: HTML file for the login page.
 * `/templates/register.html`: HTML file for the registration page.
+* `/templates/chnage_password.html`: HTML file for the change password page
+* `/tempaltes/submit_bug.html`: HTML file for submitting a bug to dashboard page
+* `/tempaltes/bug_graphs.html`: HTML file for viewing bug flair distribution graph page
 
 **`/static`** : This directory contains static assets such as stylesheets and client-side JavaScript files.
 
@@ -45,6 +59,9 @@ This system is designed to help users efficiently report and manage bugs or defe
 * `/static/dashboard.css`: CSS file for styling the dashboard page.
 * `/static/login.css`: CSS file for styling the login page.
 * `/static/register.css`: CSS file for styling the registration page.
+* `/static/change_password.css`: CSS file for styling the chnage password page
+* `/static/submit_bug.css`: CSS file for submitting a bug page
+* `/static/bug_graphs.css`: CSS file for bug graph page
 
 **`/instance`** : This directory contains instance-specific configuration files (e.g., database configuration).
 
@@ -57,6 +74,7 @@ This system is designed to help users efficiently report and manage bugs or defe
 3. **`/LICENSE`** : The license file (e.g., MIT License) specifying the terms and conditions for using the Bug Reporting System.
 4. **`/tests`** : Contains test files for unit testing and integration testing.
 5. **`/requirements.txt`** : File containing dependencies required for the Bug Reporting System (e.g., Flask).
+6. **`/.gitignore`**: File containing the files to ignore pushing to github
 
 We welcome contributions! Please follow the [contribution guidelines](CONTRIBUTING.md) to contribute to the Bug Reporting System.
 
