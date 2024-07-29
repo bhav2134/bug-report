@@ -16,12 +16,11 @@ This system is designed to help users efficiently report and manage bugs or defe
 
 1. Create a new gmail account and add a third-party app in your account settings where you will recieve an encrypted form of your password.
 2. Create a `.env` file in the bug-report directory and input `mail_password=your_encrypted_password` where your_encrypted_password is the password recieved from gmail account.
-3. Replace bugdatabase@gmail.com on `app.py` of respective line: `app.config['MAIL_USERNAME'] = 'bugdatabase@gmail.com'` with the email account you have created. 
+3. Replace bugdatabase@gmail.com on `app.py` of respective line: `app.config['MAIL_USERNAME'] = 'bugdatabase@gmail.com'` with the email account you have created.
 
 ### Starting The Bug-Report App
 
-- Go to your app.py repository and run the command in the respective terminal: `python app.py` and head over to http://127.0.0.1:5000. 
-
+- Go to your app.py repository and run the command in the respective terminal: `python app.py` and head over to http://127.0.0.1:5000.
 
 ### User Authentication
 
@@ -82,6 +81,6 @@ We welcome contributions! Please follow the [contribution guidelines](CONTRIBUTI
 
 Bhavdeep Arora, Hameez Iqbal, Mohammed Jama, Sarankan Srikaran, Kyle Teopiz
 
-## License
+## Licens
 
 This project is licensed under the [MIT License](LICENSE).
