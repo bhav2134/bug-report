@@ -71,10 +71,6 @@ This system is designed to help users efficiently report and manage bugs or defe
 
 We welcome contributions! Please follow the [contribution guidelines](CONTRIBUTING.md) to contribute to the Bug Reporting System.
 
-## Contributors
-
-Bhavdeep Arora, Hameez Iqbal, Mohammed Jama, Sarankan Srikaran, Kyle Teopiz
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
