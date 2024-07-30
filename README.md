@@ -2,10 +2,10 @@
 
 This system is designed to help users efficiently report and manage bugs or defects in various software components. This README.md file provides essential information for developers, contributors, and users to understand, contribute, and use the Bug Reporting System
 
-<video controls>
-  <source src="assets/bug-report_github.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+
+### Click on the image to see demo 
+
+[![Watch the video](assets/thumbnail.png)](https://youtu.be/qHvlIpmGq7o)
 
 ## Getting Started
 
